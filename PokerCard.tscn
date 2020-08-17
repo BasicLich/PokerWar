@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Graphics/Cards/Card_Back1.png" type="Texture" id=1]
+
+[node name="PokerCard" type="Sprite"]
+position = Vector2( 168, 232 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )

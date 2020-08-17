@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/Card.gd" type="Script" id=1]
+[ext_resource path="res://Graphics/Cards/Card.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/Cards/Card_Back2.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 28.1421, 35.4438 )
+
+[node name="Card" type="Area2D" groups=[
+"cards",
+]]
+position = Vector2( 1, 0 )
+script = ExtResource( 1 )
+drag_and_drop = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 28.6055, 36.0218 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1.58919, -4.76758 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -2, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 5, 5 )
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( -2, -1 )
+[connection signal="input_event" from="." to="." method="_on_Card_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_Card_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Card_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

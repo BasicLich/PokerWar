@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Graphics/UI/TextBox2.png" type="Texture" id=2]
+[ext_resource path="res://Resources/main_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Graphics/UI/TextBox.png" type="Texture" id=4]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Panels" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="NinePatchRect" parent="Panels"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.58
+anchor_right = 0.5
+anchor_bottom = 0.58
+margin_left = -172.0
+margin_top = -88.0
+margin_right = 172.0
+margin_bottom = 88.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panels/Message"]
+anchor_left = 0.023
+anchor_top = 0.045
+anchor_right = 0.023
+anchor_bottom = 0.045
+margin_left = 0.0879993
+margin_top = 0.0799999
+margin_right = 328.088
+margin_bottom = 160.08
+theme = ExtResource( 3 )
+text = "testtesttesttes test tsesetest setsetasdfasdf"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Panels"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.989
+anchor_right = 0.5
+anchor_bottom = 0.989
+margin_left = -56.027
+margin_top = -72.1568
+margin_right = 55.973
+margin_bottom = -0.156769
+texture = ExtResource( 4 )
+patch_margin_left = 15
+patch_margin_top = 17
+patch_margin_right = 15
+patch_margin_bottom = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Panels/NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -11.0
+margin_right = 20.0
+margin_bottom = 11.0
+theme = ExtResource( 3 )
+text = "ok"
+
+[node name="HUD" parent="." instance=ExtResource( 1 )]
+mouse_filter = 2
+
+[node name="EnemyHealthEmpty" parent="HUD" index="2"]
+margin_left = -168.0
+margin_right = -104.0
+
+[node name="EnemyHealthFull" parent="HUD" index="3"]
+margin_left = -168.0
+margin_right = -104.0
+
+[editable path="HUD"]
