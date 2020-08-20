@@ -1,54 +1,63 @@
 extends Node
 
-# signals for turning on/off dealing from deck. No requirement for use outside of the demo.
-signal turn_off_deck
-signal turn_on_deck
+var card_names = ["Ace_Spades", "2_Spades", "3_Spades", 
+				"4_Spades", "5_Spades", "6_Spades", "7_Spades", 
+				"8_Spades", "9_Spades", "10_Spades", "Jack_Spades", 
+				"Queen_Spades", "King_Spades", "Ace_Hearts", 
+				"2_Hearts", "3_Hearts", "4_Hearts", "5_Hearts", 
+				"6_Hearts", "7_Hearts", "8_Hearts", "9_Hearts", 
+				"10_Hearts", "Jack_Hearts", "Queen_Hearts", 
+				"King_Hearts", "Ace_Clubs", "2_Clubs", 
+				"3_Clubs", "4_Clubs", "5_Clubs", "6_Clubs", 
+				"7_Clubs", "8_Clubs", "9_Clubs", "10_Clubs", 
+				"Jack_Clubs", "Queen_Clubs", "King_Clubs", 
+				"Ace_Diamonds", "2_Diamonds", "3_Diamonds", 
+				"4_Diamonds", "5_Diamonds", "6_Diamonds", 
+				"7_Diamonds", "8_Diamonds", "9_Diamonds", 
+				"10_Diamonds", "Jack_Diamonds", "Queen_Diamonds", 
+				"King_Diamonds"]
 
-# used to determine if deck is being used.
-export var deck_on_screen : bool = false setget deckonscreen
+var card_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,
+					1,2,3,4,5,6,7,8,9,10,11,12,13,
+					1,2,3,4,5,6,7,8,9,10,11,12,13,
+					1,2,3,4,5,6,7,8,9,10,11,12,13]
 
-#saving/loading vars
-var save_path = "user://deck_save.cfg"
-var savefile = ConfigFile.new()
+var card_suits = ["spade","spade","spade","spade","spade","spade","spade","spade",
+				"spade","spade","spade","spade","spade",
+				"heart","heart","heart","heart","heart","heart","heart","heart",
+				"heart","heart","heart","heart","heart",
+				"club","club","club","club","club","club","club","club",
+				"club","club","club","club","club",
+				"diamond","diamond","diamond","diamond","diamond","diamond","diamond","diamond",
+				"diamond","diamond","diamond","diamond","diamond"]
+var deck = []
+
 
 func _ready():
-	pass
+	randomize()
+	makedeck()
 
-func deckonscreen(val):
-	deck_on_screen = val
-	if deck_on_screen == true:
-		emit_signal("turn_on_deck")
-	if deck_on_screen == false:
-		emit_signal("turn_off_deck")
+func give_cards(num):
+	var cardreturn = []
+	for i in num:
+		cardreturn.append(deck[i])
+		print(cardreturn[i].cardname)
+	for i in cardreturn.size():
+		deck.remove(0)
+#		print(cardreturn[i].cardname)
+#		print (cardreturn[i].cardname)
+#	remove_drawn_cards(cardreturn)
 
-# to be used later to load and save decks
-func save_deck(deck_save, key, value):
-	savefile.set_value(deck_save, key, value)
-	savefile.save(save_path)
+	return cardreturn
 
-func load_deck(section, key, display_value):
-	savefile.getvalue(section, key, display_value)
 
-	
-	
-
-# default deck.  can be used for the default starter deck. 
-func default_deck():
-	var deck = ["Ace_Spades.tres", "2_Spades.tres", "3_Spades.tres", 
-				"4_Spades.tres", "5_Spades.tres", "6_Spades.tres", "7_Spades.tres", 
-				"8_Spades.tres", "9_Spades.tres", "10_Spades.tres", "Jack_Spades.tres", 
-				"Queen_Spades.tres", "King_Spades.tres", "Ace_Hearts.tres", 
-				"2_Hearts.tres", "3_Hearts.tres", "4_Hearts.tres", "5_Hearts.tres", 
-				"6_Hearts.tres", "7_Hearts.tres", "8_Hearts.tres", "9_Hearts.tres", 
-				"10_Hearts.tres", "Jack_Hearts.tres", "Queen_Hearts.tres", 
-				"King_Hearts.tres", "Ace_Clubs.tres", "2_Clubs.tres", 
-				"3_Clubs.tres", "4_Clubs.tres", "5_Clubs.tres", "6_Clubs.tres", 
-				"7_Clubs.tres", "8_Clubs.tres", "9_Clubs.tres", "10_Clubs.tres", 
-				"Jack_Clubs.tres", "Queen_Clubs.tres", "King_Clubs.tres", 
-				"Ace_Diamonds.tres", "2_Diamonds.tres", "3_Diamonds.tres", 
-				"4_Diamonds.tres", "5_Diamonds.tres", "6_Diamonds.tres", 
-				"7_Diamonds.tres", "8_Diamonds.tres", "9_Diamonds.tres", 
-				"10_Diamonds.tres", "Jack_Diamonds.tres", "Queen_Diamonds.tres", 
-				"King_Diamonds.tres"]
-	return deck
-	
+func makedeck():
+	var cardscene = load("res://Scenes/Card.tscn")
+	var card
+	for i in card_names.size():
+		card = cardscene.instance()
+		card.cardname = card_names[i]
+		card.cardvalue = card_values[i]
+		card.cardsuit = card_suits[i]
+		deck.append(card)
+	deck.shuffle()

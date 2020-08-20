@@ -25,6 +25,10 @@ run/main_scene="res://Main.tscn"
 boot_splash/image="res://Godot.PNG"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameSettings="*res://scripts/GameSettings.gd"
+
 [display]
 
 window/size/width=600

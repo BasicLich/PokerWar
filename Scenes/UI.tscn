@@ -1,11 +1,53 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Graphics/UI/TextBox2.png" type="Texture" id=2]
 [ext_resource path="res://Resources/main_theme.tres" type="Theme" id=3]
 [ext_resource path="res://Graphics/UI/TextBox.png" type="Texture" id=4]
+[ext_resource path="res://scripts/UI.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "DisplayAlert"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Alert:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Alert:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Alert:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 5, 5 ) ]
+}
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource( 5 )
 
 [node name="Panels" type="Control" parent="."]
 anchor_right = 1.0
@@ -90,5 +132,30 @@ margin_right = -104.0
 [node name="EnemyHealthFull" parent="HUD" index="3"]
 margin_left = -168.0
 margin_right = -104.0
+
+[node name="Alert" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -142.0
+margin_top = -52.0
+margin_right = 142.0
+margin_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.06172, 1.06172 )
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "choose war card"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DisplayAlert = SubResource( 1 )
 
 [editable path="HUD"]
